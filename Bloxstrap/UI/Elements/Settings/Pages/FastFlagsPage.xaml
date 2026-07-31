@@ -68,15 +68,10 @@
             </StackPanel>
         </ui:CardAction>
 
-        <ui:CardExpander Margin="0,16,0,0" Header="✨ Magical Allowlisted Flags" IsExpanded="True">
-            <StackPanel>
-                <TextBlock Text="Click the button below to load all 18 officially allowlisted Roblox FFlags. These are the ONLY flags Roblox allows locally." 
-                           Foreground="{DynamicResource TextFillColorSecondaryBrush}" 
-                           TextWrapping="Wrap" Margin="0,0,0,12"/>
-                <Button x:Name="LoadAllowlistedButton" Content="Load All Allowlisted Flags" 
-                        Click="LoadAllowlistedButton_Click" HorizontalAlignment="Left" Padding="16,8,16,8"/>
-                <TextBlock x:Name="LoadStatusText" Margin="0,12,0,0" Visibility="Collapsed" FontWeight="SemiBold"/>
-            </StackPanel>
-        </ui:CardExpander>
+        <TextBlock Margin="0,16,0,0" Text="✨ Magical Allowlisted Flags" FontSize="16" FontWeight="Medium"/>
+        <TextBlock Text="Click to copy all 18 official Roblox FFlags to clipboard" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,4,0,8"/>
+        <Button x:Name="LoadAllowlistedButton" Content="Copy Allowlisted Flags" Click="LoadAllowlistedButton_Click" HorizontalAlignment="Left" Padding="16,8,16,8"/>
+        <TextBlock x:Name="LoadStatusText" Margin="0,8,0,0" Visibility="Collapsed" FontWeight="SemiBold" Foreground="LimeGreen"/>
+
     </StackPanel>
 </ui:UiPage>
