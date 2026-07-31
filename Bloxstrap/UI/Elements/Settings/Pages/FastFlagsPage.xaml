@@ -1,4 +1,4 @@
-﻿<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.FastFlagsPage"
+<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.FastFlagsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -67,5 +67,16 @@
                 <TextBlock Margin="0,2,0,0" FontSize="12" Text="{x:Static resources:Strings.Menu_FastFlags_Editor_Description}" Padding="0,0,16,0"  Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
             </StackPanel>
         </ui:CardAction>
+
+        <ui:CardExpander Margin="0,16,0,0" Header="✨ Magical Allowlisted Flags" IsExpanded="True">
+            <StackPanel>
+                <TextBlock Text="Click the button below to load all 18 officially allowlisted Roblox FFlags. These are the ONLY flags Roblox allows locally." 
+                           Foreground="{DynamicResource TextFillColorSecondaryBrush}" 
+                           TextWrapping="Wrap" Margin="0,0,0,12"/>
+                <Button x:Name="LoadAllowlistedButton" Content="Load All Allowlisted Flags" 
+                        Click="LoadAllowlistedButton_Click" HorizontalAlignment="Left" Padding="16,8,16,8"/>
+                <TextBlock x:Name="LoadStatusText" Margin="0,12,0,0" Visibility="Collapsed" FontWeight="SemiBold"/>
+            </StackPanel>
+        </ui:CardExpander>
     </StackPanel>
 </ui:UiPage>
