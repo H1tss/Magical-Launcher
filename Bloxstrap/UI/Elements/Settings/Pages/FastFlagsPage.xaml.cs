@@ -19,36 +19,30 @@ namespace Bloxstrap.UI.Elements.Settings.Pages
 
         private void LoadAllowlistedButton_Click(object sender, RoutedEventArgs e)
         {
-            var allowlistedFlags = new Dictionary<string, object>
-            {
-                ["DFIntCSGLevelOfDetailSwitchingDistance"] = 0,
-                ["DFIntCSGLevelOfDetailSwitchingDistanceL12"] = 0,
-                ["DFIntCSGLevelOfDetailSwitchingDistanceL23"] = 0,
-                ["DFIntCSGLevelOfDetailSwitchingDistanceL34"] = 0,
-                ["FFlagHandleAltEnterFullscreenManually"] = true,
-                ["DFFlagTextureQualityOverrideEnabled"] = false,
-                ["DFIntTextureQualityOverride"] = 3,
-                ["FIntDebugForceMSAASamples"] = 4,
-                ["DFFlagDisableDPIScale"] = false,
-                ["FFlagDebugGraphicsPreferD3D11"] = false,
-                ["FFlagDebugSkyGray"] = false,
-                ["DFFlagDebugPauseVoxelizer"] = false,
-                ["DFIntDebugFRMQualityLevelOverride"] = 10,
-                ["FIntFRMMaxGrassDistance"] = 1000,
-                ["FIntFRMMinGrassDistance"] = 0,
-                ["FFlagDebugGraphicsPreferVulkan"] = false,
-                ["FFlagDebugGraphicsPreferOpenGL"] = false,
-                ["FIntGrassMovementReducedMotionFactor"] = 0
-            };
+            var json = @"{
+  ""DFIntCSGLevelOfDetailSwitchingDistance"": ""0"",
+  ""DFIntCSGLevelOfDetailSwitchingDistanceL12"": ""0"",
+  ""DFIntCSGLevelOfDetailSwitchingDistanceL23"": ""0"",
+  ""DFIntCSGLevelOfDetailSwitchingDistanceL34"": ""0"",
+  ""FFlagHandleAltEnterFullscreenManually"": ""True"",
+  ""DFFlagTextureQualityOverrideEnabled"": ""False"",
+  ""DFIntTextureQualityOverride"": ""3"",
+  ""FIntDebugForceMSAASamples"": ""4"",
+  ""DFFlagDisableDPIScale"": ""False"",
+  ""FFlagDebugGraphicsPreferD3D11"": ""False"",
+  ""FFlagDebugSkyGray"": ""False"",
+  ""DFFlagDebugPauseVoxelizer"": ""False"",
+  ""DFIntDebugFRMQualityLevelOverride"": ""10"",
+  ""FIntFRMMaxGrassDistance"": ""1000"",
+  ""FIntFRMMinGrassDistance"": ""0"",
+  ""FFlagDebugGraphicsPreferVulkan"": ""False"",
+  ""FFlagDebugGraphicsPreferOpenGL"": ""False"",
+  ""FIntGrassMovementReducedMotionFactor"": ""0""
+}";
 
-            foreach (var flag in allowlistedFlags)
-            {
-                App.Settings.Prop.FlagValues[flag.Key] = flag.Value.ToString();
-            }
+            Clipboard.SetText(json);
             
-            App.Settings.Save();
-            
-            LoadStatusText.Text = "✅ All 18 allowlisted flags loaded!";
+            LoadStatusText.Text = "✅ JSON copied to clipboard! Paste it into the FastFlag Editor below.";
             LoadStatusText.Visibility = Visibility.Visible;
             LoadStatusText.Foreground = new SolidColorBrush(Colors.LimeGreen);
         }
