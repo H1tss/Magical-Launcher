@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Bloxstrap.UI.ViewModels;
 using Wpf.Ui.Controls;
 
 namespace Bloxstrap.UI.Elements.Settings.Pages
@@ -12,7 +11,6 @@ namespace Bloxstrap.UI.Elements.Settings.Pages
         public FastFlagsPage()
         {
             InitializeComponent();
-            DataContext = new FastFlagsViewModel();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -45,10 +43,10 @@ namespace Bloxstrap.UI.Elements.Settings.Pages
 
             foreach (var flag in allowlistedFlags)
             {
-                App.FastFlags.SetValue(flag.Key, flag.Value.ToString());
+                App.Settings.Prop.FlagValues[flag.Key] = flag.Value.ToString();
             }
             
-            App.FastFlags.Save();
+            App.Settings.Save();
             
             LoadStatusText.Text = "✅ All 18 allowlisted flags loaded!";
             LoadStatusText.Visibility = Visibility.Visible;
