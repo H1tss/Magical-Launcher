@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -16,20 +17,16 @@ namespace Bloxstrap.UI.Elements.Settings.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            // Existing load logic
         }
 
         private void LoadAllowlistedButton_Click(object sender, RoutedEventArgs e)
         {
             var allowlistedFlags = new Dictionary<string, object>
             {
-                // Geometry
                 ["DFIntCSGLevelOfDetailSwitchingDistance"] = 0,
                 ["DFIntCSGLevelOfDetailSwitchingDistanceL12"] = 0,
                 ["DFIntCSGLevelOfDetailSwitchingDistanceL23"] = 0,
                 ["DFIntCSGLevelOfDetailSwitchingDistanceL34"] = 0,
-                
-                // Rendering
                 ["FFlagHandleAltEnterFullscreenManually"] = true,
                 ["DFFlagTextureQualityOverrideEnabled"] = false,
                 ["DFIntTextureQualityOverride"] = 3,
@@ -43,8 +40,6 @@ namespace Bloxstrap.UI.Elements.Settings.Pages
                 ["FIntFRMMinGrassDistance"] = 0,
                 ["FFlagDebugGraphicsPreferVulkan"] = false,
                 ["FFlagDebugGraphicsPreferOpenGL"] = false,
-                
-                // UI
                 ["FIntGrassMovementReducedMotionFactor"] = 0
             };
 
@@ -55,7 +50,7 @@ namespace Bloxstrap.UI.Elements.Settings.Pages
             
             App.FastFlags.Save();
             
-            LoadStatusText.Text = "✅ All 18 allowlisted flags loaded! They will apply on next Roblox launch.";
+            LoadStatusText.Text = "✅ All 18 allowlisted flags loaded!";
             LoadStatusText.Visibility = Visibility.Visible;
             LoadStatusText.Foreground = new SolidColorBrush(Colors.LimeGreen);
         }
