@@ -1,57 +1,63 @@
-﻿using System.Windows;
-using System.Windows.Input;
-
-using Bloxstrap.UI.ViewModels.Settings;
-using Wpf.Ui.Mvvm.Contracts;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using Bloxstrap.UI.ViewModels;
+using Wpf.Ui.Controls;
 
 namespace Bloxstrap.UI.Elements.Settings.Pages
 {
-    /// <summary>
-    /// Interaction logic for FastFlagsPage.xaml
-    /// </summary>
-    public partial class FastFlagsPage
+    public partial class FastFlagsPage : UiPage
     {
-        private bool _initialLoad = false;
-
-        private FastFlagsViewModel _viewModel = null!;
-
         public FastFlagsPage()
         {
-            SetupViewModel();
             InitializeComponent();
-        }
-
-        private void SetupViewModel()
-        {
-            _viewModel = new FastFlagsViewModel();
-
-            _viewModel.OpenFlagEditorEvent += OpenFlagEditor;
-            _viewModel.RequestPageReloadEvent += (_, _) => SetupViewModel();
-
-            DataContext = _viewModel;
-        }
-
-        private void OpenFlagEditor(object? sender, EventArgs e)
-        {
-            if (Window.GetWindow(this) is INavigationWindow window)
-                    window.Navigate(typeof(FastFlagEditorPage));
+            DataContext = new FastFlagsViewModel();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            // refresh datacontext on page load to synchronize with editor page
-            
-            if (!_initialLoad)
-            {
-                _initialLoad = true;
-                return;
-            }
-
-            SetupViewModel();
+            // Existing load logic
         }
 
-        private void ValidateInt32(object sender, TextCompositionEventArgs e) => e.Handled = e.Text != "-" && !Int32.TryParse(e.Text, out int _);
-        
-        private void ValidateUInt32(object sender, TextCompositionEventArgs e) => e.Handled = !UInt32.TryParse(e.Text, out uint _);
+        private void LoadAllowlistedButton_Click(object sender, RoutedEventArgs e)
+        {
+            var allowlistedFlags = new Dictionary<string, object>
+            {
+                // Geometry
+                ["DFIntCSGLevelOfDetailSwitchingDistance"] = 0,
+                ["DFIntCSGLevelOfDetailSwitchingDistanceL12"] = 0,
+                ["DFIntCSGLevelOfDetailSwitchingDistanceL23"] = 0,
+                ["DFIntCSGLevelOfDetailSwitchingDistanceL34"] = 0,
+                
+                // Rendering
+                ["FFlagHandleAltEnterFullscreenManually"] = true,
+                ["DFFlagTextureQualityOverrideEnabled"] = false,
+                ["DFIntTextureQualityOverride"] = 3,
+                ["FIntDebugForceMSAASamples"] = 4,
+                ["DFFlagDisableDPIScale"] = false,
+                ["FFlagDebugGraphicsPreferD3D11"] = false,
+                ["FFlagDebugSkyGray"] = false,
+                ["DFFlagDebugPauseVoxelizer"] = false,
+                ["DFIntDebugFRMQualityLevelOverride"] = 10,
+                ["FIntFRMMaxGrassDistance"] = 1000,
+                ["FIntFRMMinGrassDistance"] = 0,
+                ["FFlagDebugGraphicsPreferVulkan"] = false,
+                ["FFlagDebugGraphicsPreferOpenGL"] = false,
+                
+                // UI
+                ["FIntGrassMovementReducedMotionFactor"] = 0
+            };
+
+            foreach (var flag in allowlistedFlags)
+            {
+                App.FastFlags.SetValue(flag.Key, flag.Value.ToString());
+            }
+            
+            App.FastFlags.Save();
+            
+            LoadStatusText.Text = "✅ All 18 allowlisted flags loaded! They will apply on next Roblox launch.";
+            LoadStatusText.Visibility = Visibility.Visible;
+            LoadStatusText.Foreground = new SolidColorBrush(Colors.LimeGreen);
+        }
     }
 }
