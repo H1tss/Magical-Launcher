@@ -11,15 +11,11 @@ namespace Bloxstrap.UI.ViewModels.Settings
     {
         private Dictionary<string, object>? _preResetFlags;
 
-        // ----------------------------------------------------------------
-        // One-click performance presets (Potato / Performance / Balanced /
-        // Quality / Ultra). Applying one writes a coordinated batch of
-        // FastFlags at once, then reloads the page so every slider/toggle
-        // below reflects the new state.
-        // ----------------------------------------------------------------
+        // ================================================================
+        // PERFORMANCE PRESETS (one-click profiles)
+        // ================================================================
 
-        // ---- Preset label list (used by ComboBox ItemsSource) ----
-        public List<string> PerformancePresetLabels { get; } = new List<string>
+        public List<string> PerformancePresetLabels { get; } = new()
         {
             "Default (no override)",
             "Potato (lowest quality)",
@@ -29,7 +25,6 @@ namespace Bloxstrap.UI.ViewModels.Settings
             "Ultra (max everything)"
         };
 
-        // Maps label index → enum value (must match PerformancePresetLabels order)
         private static readonly PerformancePreset[] _presetOrder = {
             PerformancePreset.Default,
             PerformancePreset.Potato,
@@ -51,8 +46,7 @@ namespace Bloxstrap.UI.ViewModels.Settings
             {
                 int idx = PerformancePresetLabels.IndexOf(value);
                 if (idx < 0) return;
-                var preset = _presetOrder[idx];
-                ApplyPerformancePreset(preset);
+                ApplyPerformancePreset(_presetOrder[idx]);
                 RequestPageReloadEvent?.Invoke(this, EventArgs.Empty);
                 OnPropertyChanged(nameof(SelectedPerformancePresetLabel));
             }
@@ -68,7 +62,6 @@ namespace Bloxstrap.UI.ViewModels.Settings
         }
 
         public event EventHandler? RequestPageReloadEvent;
-        
         public event EventHandler? OpenFlagEditorEvent;
 
         private void OpenFastFlagEditor() => OpenFlagEditorEvent?.Invoke(this, EventArgs.Empty);
@@ -77,19 +70,61 @@ namespace Bloxstrap.UI.ViewModels.Settings
 
         public Visibility CanShowFastFlagEditor => App.IsStudioInstalled ? Visibility.Visible : Visibility.Collapsed;
 
+        // ================================================================
+        // FAST FLAG MANAGER TOGGLE
+        // ================================================================
+
         public bool UseFastFlagManager
         {
             get => App.Settings.Prop.UseFastFlagManager;
             set => App.Settings.Prop.UseFastFlagManager = value;
         }
 
-        public IReadOnlyDictionary<MSAAMode, string?> MSAALevels => FastFlagManager.MSAAModes;
+        // ================================================================
+        // MSAA — string-based binding (no enum, no converter)
+        // ================================================================
 
-        public MSAAMode SelectedMSAALevel
+        public List<string> MSAALevelLabels { get; } = new()
         {
-            get => MSAALevels.FirstOrDefault(x => x.Value == App.FastFlags.GetPreset("Rendering.MSAA")).Key;
-            set => App.FastFlags.SetPreset("Rendering.MSAA", MSAALevels[value]);
+            "Automatic",
+            "1x",
+            "2x",
+            "4x",
+            "8x",
+            "16x"
+        };
+
+        private static readonly Dictionary<string, string?> _msaaMap = new()
+        {
+            { "Automatic", null },
+            { "1x", "1" },
+            { "2x", "2" },
+            { "4x", "4" },
+            { "8x", "8" },
+            { "16x", "16" }
+        };
+
+        public string SelectedMSAALevelLabel
+        {
+            get
+            {
+                string? current = App.FastFlags.GetPreset("Rendering.MSAA");
+                foreach (var (label, val) in _msaaMap)
+                    if (val == current)
+                        return label;
+                return "Automatic";
+            }
+            set
+            {
+                if (_msaaMap.TryGetValue(value, out var flagVal))
+                    App.FastFlags.SetPreset("Rendering.MSAA", flagVal);
+                OnPropertyChanged(nameof(SelectedMSAALevelLabel));
+            }
         }
+
+        // ================================================================
+        // FIX DISPLAY SCALING (DPI)
+        // ================================================================
 
         public bool FixDisplayScaling
         {
@@ -97,24 +132,60 @@ namespace Bloxstrap.UI.ViewModels.Settings
             set => App.FastFlags.SetPreset("Rendering.DisableScaling", value ? "True" : null);
         }
 
-        public IReadOnlyDictionary<TextureQuality, string?> TextureQualities => FastFlagManager.TextureQualityLevels;
+        // ================================================================
+        // TEXTURE QUALITY — string-based binding
+        // ================================================================
 
-        public TextureQuality SelectedTextureQuality
+        public List<string> TextureQualityLabels { get; } = new()
         {
-            get => TextureQualities.Where(x => x.Value == App.FastFlags.GetPreset("Rendering.TextureQuality.Level")).FirstOrDefault().Key;
+            "Automatic",
+            "Level 0 (lowest)",
+            "Level 1",
+            "Level 2",
+            "Level 3 (highest)"
+        };
+
+        private static readonly Dictionary<string, string?> _textureMap = new()
+        {
+            { "Automatic", null },
+            { "Level 0 (lowest)", "0" },
+            { "Level 1", "1" },
+            { "Level 2", "2" },
+            { "Level 3 (highest)", "3" }
+        };
+
+        public string SelectedTextureQualityLabel
+        {
+            get
+            {
+                string? current = App.FastFlags.GetPreset("Rendering.TextureQuality.Level");
+                foreach (var (label, val) in _textureMap)
+                    if (val == current)
+                        return label;
+                return "Automatic";
+            }
             set
             {
-                if (value == TextureQuality.Default)
+                if (!_textureMap.TryGetValue(value, out var levelVal))
+                    return;
+
+                if (levelVal is null)
                 {
-                    App.FastFlags.SetPreset("Rendering.TextureQuality", null);
+                    App.FastFlags.SetPreset("Rendering.TextureQuality.OverrideEnabled", null);
+                    App.FastFlags.SetPreset("Rendering.TextureQuality.Level", null);
                 }
                 else
                 {
                     App.FastFlags.SetPreset("Rendering.TextureQuality.OverrideEnabled", "True");
-                    App.FastFlags.SetPreset("Rendering.TextureQuality.Level", TextureQualities[value]);
+                    App.FastFlags.SetPreset("Rendering.TextureQuality.Level", levelVal);
                 }
+                OnPropertyChanged(nameof(SelectedTextureQualityLabel));
             }
         }
+
+        // ================================================================
+        // RESET CONFIGURATION
+        // ================================================================
 
         public bool ResetConfiguration
         {
@@ -137,12 +208,9 @@ namespace Bloxstrap.UI.ViewModels.Settings
             }
         }
 
-        // ----------------------------------------------------------------
-        // Helpers for the 13 directly-bound allowlisted flags below.
-        // -1 is used as the "not set / use Roblox default" sentinel for
-        // every slider-backed int flag, since 0 is a meaningful value for
-        // several of them (e.g. grass distance).
-        // ----------------------------------------------------------------
+        // ================================================================
+        // INDIVIDUAL FLAG BINDINGS (sliders + toggles)
+        // ================================================================
 
         private static int GetIntFlag(string key)
         {
@@ -159,7 +227,7 @@ namespace Bloxstrap.UI.ViewModels.Settings
 
         private static void SetBoolFlag(string key, bool value) => App.FastFlags.SetValue(key, value ? "True" : null);
 
-        // --- Geometry ---
+        // --- Geometry (CSG LOD) ---
 
         public int CSGLodSwitchingDistance
         {
@@ -185,7 +253,7 @@ namespace Bloxstrap.UI.ViewModels.Settings
             set => SetIntFlag("DFIntCSGLevelOfDetailSwitchingDistanceL34", value);
         }
 
-        // --- Rendering (advanced / debug) ---
+        // --- Rendering backend (toggles) ---
 
         public bool PreferD3D11
         {
@@ -217,6 +285,8 @@ namespace Bloxstrap.UI.ViewModels.Settings
             set => SetBoolFlag("DFFlagDebugPauseVoxelizer", value);
         }
 
+        // --- FRM / grass (sliders) ---
+
         public int DebugFRMQualityLevelOverride
         {
             get => GetIntFlag("DFIntDebugFRMQualityLevelOverride");
@@ -234,8 +304,6 @@ namespace Bloxstrap.UI.ViewModels.Settings
             get => GetIntFlag("FIntFRMMinGrassDistance");
             set => SetIntFlag("FIntFRMMinGrassDistance", value);
         }
-
-        // --- UI ---
 
         public int GrassMovementReducedMotionFactor
         {

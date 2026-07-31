@@ -22,7 +22,7 @@
         <controls:OptionControl Header="Performance Profile" Description="Apply a coordinated batch of FastFlags. 'Default' clears every flag this fork manages (your other flags are untouched).">
             <StackPanel Orientation="Horizontal">
                 <ComboBox Margin="5,0,0,0" Padding="10,5,10,5" Width="240"
-                           ItemsSource="{Binding PerformancePresetLabels, Mode=OneTime}"
+                           ItemsSource="{Binding PerformancePresetLabels}"
                            SelectedItem="{Binding SelectedPerformancePresetLabel, Mode=TwoWay}" />
             </StackPanel>
         </controls:OptionControl>
@@ -40,13 +40,9 @@
 
         <controls:OptionControl 
             Header="{x:Static resources:Strings.Menu_FastFlags_Presets_MSAA_Title}">
-            <ComboBox Margin="5,0,0,0" Padding="10,5,10,5" Width="200" ItemsSource="{Binding MSAALevels.Keys, Mode=OneTime}" SelectedItem="{Binding SelectedMSAALevel, Mode=TwoWay}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Path=., Converter={StaticResource EnumNameConverter}}" />
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+            <ComboBox Margin="5,0,0,0" Padding="10,5,10,5" Width="200"
+                      ItemsSource="{Binding MSAALevelLabels}"
+                      SelectedItem="{Binding SelectedMSAALevelLabel, Mode=TwoWay}" />
         </controls:OptionControl>
 
         <controls:OptionControl 
@@ -58,13 +54,9 @@
 
         <controls:OptionControl 
             Header="{x:Static resources:Strings.Menu_FastFlags_Presets_TextureQuality_Title}">
-            <ComboBox Margin="5,0,0,0" Padding="10,5,10,5" Width="200" ItemsSource="{Binding TextureQualities.Keys, Mode=OneTime}" SelectedItem="{Binding SelectedTextureQuality, Mode=TwoWay}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Path=., Converter={StaticResource EnumNameConverter}}" />
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+            <ComboBox Margin="5,0,0,0" Padding="10,5,10,5" Width="200"
+                      ItemsSource="{Binding TextureQualityLabels}"
+                      SelectedItem="{Binding SelectedTextureQualityLabel, Mode=TwoWay}" />
         </controls:OptionControl>
 
         <!-- ===================== Geometry ===================== -->
