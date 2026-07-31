@@ -18,24 +18,43 @@ namespace Bloxstrap.UI.ViewModels.Settings
         // below reflects the new state.
         // ----------------------------------------------------------------
 
-        public IReadOnlyDictionary<PerformancePreset, string> PerformancePresetOptions => new Dictionary<PerformancePreset, string>
+        // ---- Preset label list (used by ComboBox ItemsSource) ----
+        public List<string> PerformancePresetLabels { get; } = new List<string>
         {
-            { PerformancePreset.Default, "Default (no override)" },
-            { PerformancePreset.Potato, "Potato (lowest quality)" },
-            { PerformancePreset.Performance, "Performance (max FPS)" },
-            { PerformancePreset.Balanced, "Balanced (recommended)" },
-            { PerformancePreset.Quality, "Quality (high fidelity)" },
-            { PerformancePreset.Ultra, "Ultra (max everything)" }
+            "Default (no override)",
+            "Potato (lowest quality)",
+            "Performance (max FPS)",
+            "Balanced (recommended)",
+            "Quality (high fidelity)",
+            "Ultra (max everything)"
         };
 
-        public PerformancePreset SelectedPerformancePreset
+        // Maps label index → enum value (must match PerformancePresetLabels order)
+        private static readonly PerformancePreset[] _presetOrder = {
+            PerformancePreset.Default,
+            PerformancePreset.Potato,
+            PerformancePreset.Performance,
+            PerformancePreset.Balanced,
+            PerformancePreset.Quality,
+            PerformancePreset.Ultra
+        };
+
+        public string SelectedPerformancePresetLabel
         {
-            get => Models.PerformancePresets.DetectCurrent(App.FastFlags.Prop);
+            get
+            {
+                var detected = Models.PerformancePresets.DetectCurrent(App.FastFlags.Prop);
+                int idx = Array.IndexOf(_presetOrder, detected);
+                return idx >= 0 ? PerformancePresetLabels[idx] : PerformancePresetLabels[0];
+            }
             set
             {
-                ApplyPerformancePreset(value);
+                int idx = PerformancePresetLabels.IndexOf(value);
+                if (idx < 0) return;
+                var preset = _presetOrder[idx];
+                ApplyPerformancePreset(preset);
                 RequestPageReloadEvent?.Invoke(this, EventArgs.Empty);
-                OnPropertyChanged(nameof(SelectedPerformancePreset));
+                OnPropertyChanged(nameof(SelectedPerformancePresetLabel));
             }
         }
 
@@ -47,13 +66,6 @@ namespace Bloxstrap.UI.ViewModels.Settings
             foreach (var (key, value) in profile)
                 App.FastFlags.SetValue(key, value);
         }
-
-        public ICommand ApplyPerformancePresetCommand => new RelayCommand<PerformancePreset>(preset =>
-        {
-            ApplyPerformancePreset(preset);
-            RequestPageReloadEvent?.Invoke(this, EventArgs.Empty);
-            OnPropertyChanged(nameof(SelectedPerformancePreset));
-        });
 
         public event EventHandler? RequestPageReloadEvent;
         

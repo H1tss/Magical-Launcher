@@ -22,10 +22,8 @@
         <controls:OptionControl Header="Performance Profile" Description="Apply a coordinated batch of FastFlags. 'Default' clears every flag this fork manages (your other flags are untouched).">
             <StackPanel Orientation="Horizontal">
                 <ComboBox Margin="5,0,0,0" Padding="10,5,10,5" Width="240"
-                           ItemsSource="{Binding PerformancePresetOptions, Mode=OneTime}"
-                           SelectedValue="{Binding SelectedPerformancePreset, Mode=TwoWay}"
-                           SelectedValuePath="Key"
-                           DisplayMemberPath="Value" />
+                           ItemsSource="{Binding PerformancePresetLabels, Mode=OneTime}"
+                           SelectedItem="{Binding SelectedPerformancePresetLabel, Mode=TwoWay}" />
             </StackPanel>
         </controls:OptionControl>
 
@@ -42,7 +40,7 @@
 
         <controls:OptionControl 
             Header="{x:Static resources:Strings.Menu_FastFlags_Presets_MSAA_Title}">
-            <ComboBox Margin="5,0,0,0" Padding="10,5,10,5" Width="200" ItemsSource="{Binding MSAALevels.Keys, Mode=OneTime}" Text="{Binding SelectedMSAALevel, Mode=TwoWay}">
+            <ComboBox Margin="5,0,0,0" Padding="10,5,10,5" Width="200" ItemsSource="{Binding MSAALevels.Keys, Mode=OneTime}" SelectedItem="{Binding SelectedMSAALevel, Mode=TwoWay}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Path=., Converter={StaticResource EnumNameConverter}}" />
@@ -60,7 +58,7 @@
 
         <controls:OptionControl 
             Header="{x:Static resources:Strings.Menu_FastFlags_Presets_TextureQuality_Title}">
-            <ComboBox Margin="5,0,0,0" Padding="10,5,10,5" Width="200" ItemsSource="{Binding TextureQualities.Keys, Mode=OneTime}" Text="{Binding SelectedTextureQuality, Mode=TwoWay}">
+            <ComboBox Margin="5,0,0,0" Padding="10,5,10,5" Width="200" ItemsSource="{Binding TextureQualities.Keys, Mode=OneTime}" SelectedItem="{Binding SelectedTextureQuality, Mode=TwoWay}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Path=., Converter={StaticResource EnumNameConverter}}" />
@@ -105,23 +103,23 @@
         <TextBlock Text="Rendering (Advanced)" FontSize="20" FontWeight="Medium" Margin="0,24,0,0" />
 
         <controls:OptionControl Header="Prefer Direct3D 11" Description="Force the Direct3D 11 rendering backend.">
-            <ui:ToggleSwitch IsChecked="{Binding PreferD3D11, Mode=TwoWay}" />
+            <ui:ToggleSwitch IsChecked="{Binding PreferD3D11, Mode=TwoWay, FallbackValue=False}" />
         </controls:OptionControl>
 
         <controls:OptionControl Header="Prefer Vulkan" Description="Force the Vulkan rendering backend.">
-            <ui:ToggleSwitch IsChecked="{Binding PreferVulkan, Mode=TwoWay}" />
+            <ui:ToggleSwitch IsChecked="{Binding PreferVulkan, Mode=TwoWay, FallbackValue=False}" />
         </controls:OptionControl>
 
         <controls:OptionControl Header="Prefer OpenGL" Description="Force the OpenGL rendering backend.">
-            <ui:ToggleSwitch IsChecked="{Binding PreferOpenGL, Mode=TwoWay}" />
+            <ui:ToggleSwitch IsChecked="{Binding PreferOpenGL, Mode=TwoWay, FallbackValue=False}" />
         </controls:OptionControl>
 
         <controls:OptionControl Header="Force Gray Sky" Description="Replaces the sky with a flat gray color, useful for debugging.">
-            <ui:ToggleSwitch IsChecked="{Binding DebugSkyGray, Mode=TwoWay}" />
+            <ui:ToggleSwitch IsChecked="{Binding DebugSkyGray, Mode=TwoWay, FallbackValue=False}" />
         </controls:OptionControl>
 
         <controls:OptionControl Header="Pause Voxelizer" Description="Pauses terrain voxelization.">
-            <ui:ToggleSwitch IsChecked="{Binding DebugPauseVoxelizer, Mode=TwoWay}" />
+            <ui:ToggleSwitch IsChecked="{Binding DebugPauseVoxelizer, Mode=TwoWay, FallbackValue=False}" />
         </controls:OptionControl>
 
         <controls:OptionControl Header="FRM Quality Level Override">
