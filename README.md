@@ -35,6 +35,35 @@
 - 💎 **Sparkle Effects** - Everything is more magical with sparkles and glitter!
 - 🎪 **Unicorn Theme** - A complete mythical redesign of the entire launcher interface
 
+## ⚡ Performance & Customization Focus
+
+Magical Launcher is tuned to be a **performance- and customization-first** fork of BloxStrap. On top of the original bootstrapper, this fork adds:
+
+### One-click Performance Presets
+A new **⚡ Performance Presets** section at the top of the FastFlags page lets you apply a coordinated batch of engine flags with a single dropdown:
+
+| Preset | Target | What it does |
+|---|---|---|
+| **Default** | — | Clears every flag Magical Launcher manages (your other flags are untouched) |
+| **Potato** | Toasters / integrated GPUs | Lowest textures, no MSAA, no grass, gray sky, paused voxelizer |
+| **Performance** | Low-end / laptops | D3D11 backend, 2x MSAA, low textures, aggressive LOD, minimal grass |
+| **Balanced** | Most PCs (recommended) | 4x MSAA, medium textures, moderate LOD, normal grass |
+| **Quality** | Mid-to-high GPUs | 8x MSAA, high textures, far LOD, dense grass, HiDPI preserved |
+| **Ultra** | Strong GPUs | 16x MSAA, max textures, max LOD distances, max grass |
+
+Each preset writes a curated batch of `Rendering`, `Geometry`, `FRM`, and engine flags. The dropdown auto-detects the currently-active preset, and you can still fine-tune any individual flag below it.
+
+### Deeper Customization
+Beyond stock BloxStrap, the FastFlags page also exposes:
+- **Geometry** — CSG LOD switching distances (L0-L1, L1-L2, L2-L3, L3-L4) for tuning how far away meshes drop detail
+- **Rendering backend** — prefer D3D11 / Vulkan / OpenGL directly from the UI
+- **FRM Quality Level Override** — slide from 1 (potato) to 21 (ultra)
+- **Grass distance** — min/max grass draw distance + reduced-motion factor
+- **Debug toggles** — Force Gray Sky, Pause Voxelizer for diagnosing perf issues
+
+### Rebrand-safe
+All project constants (`ProjectName`, `ProjectOwner`, `ProjectRepository`, download/help/support links) point at this fork, so crash reports, update checks, and the installer all reference Magical Launcher instead of upstream BloxStrap.
+
 ## 🚀 Installing Magical Launcher
 
 Download the [latest release of Magical Launcher](https://github.com/Halo-tuff/Magical-Launcher/releases/latest), and run it. Configure your mystical preferences if needed, and install. That's about it!

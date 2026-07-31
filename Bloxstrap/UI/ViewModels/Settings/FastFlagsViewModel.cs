@@ -11,6 +11,50 @@ namespace Bloxstrap.UI.ViewModels.Settings
     {
         private Dictionary<string, object>? _preResetFlags;
 
+        // ----------------------------------------------------------------
+        // One-click performance presets (Potato / Performance / Balanced /
+        // Quality / Ultra). Applying one writes a coordinated batch of
+        // FastFlags at once, then reloads the page so every slider/toggle
+        // below reflects the new state.
+        // ----------------------------------------------------------------
+
+        public IReadOnlyDictionary<PerformancePreset, string> PerformancePresetOptions => new Dictionary<PerformancePreset, string>
+        {
+            { PerformancePreset.Default, "Default (no override)" },
+            { PerformancePreset.Potato, "Potato (lowest quality)" },
+            { PerformancePreset.Performance, "Performance (max FPS)" },
+            { PerformancePreset.Balanced, "Balanced (recommended)" },
+            { PerformancePreset.Quality, "Quality (high fidelity)" },
+            { PerformancePreset.Ultra, "Ultra (max everything)" }
+        };
+
+        public PerformancePreset SelectedPerformancePreset
+        {
+            get => Models.PerformancePresets.DetectCurrent(App.FastFlags.Prop);
+            set
+            {
+                ApplyPerformancePreset(value);
+                RequestPageReloadEvent?.Invoke(this, EventArgs.Empty);
+                OnPropertyChanged(nameof(SelectedPerformancePreset));
+            }
+        }
+
+        private void ApplyPerformancePreset(PerformancePreset preset)
+        {
+            if (!Models.PerformancePresets.Profiles.TryGetValue(preset, out var profile))
+                return;
+
+            foreach (var (key, value) in profile)
+                App.FastFlags.SetValue(key, value);
+        }
+
+        public ICommand ApplyPerformancePresetCommand => new RelayCommand<PerformancePreset>(preset =>
+        {
+            ApplyPerformancePreset(preset);
+            RequestPageReloadEvent?.Invoke(this, EventArgs.Empty);
+            OnPropertyChanged(nameof(SelectedPerformancePreset));
+        });
+
         public event EventHandler? RequestPageReloadEvent;
         
         public event EventHandler? OpenFlagEditorEvent;

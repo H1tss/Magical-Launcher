@@ -15,8 +15,22 @@
     <StackPanel Margin="0,0,14,14">
         <TextBlock Margin="0,0,0,16" Text="{x:Static resources:Strings.Menu_FastFlags_Description}" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
 
+        <!-- ===================== Performance Presets ===================== -->
+        <TextBlock Text="⚡ Performance Presets" FontSize="20" FontWeight="Medium" Margin="0,0,0,0" />
+        <TextBlock Text="One-click profiles that tune rendering, geometry, grass and engine flags for your hardware. Fine-tune individual options below after applying a preset." FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,8" TextWrapping="Wrap" />
+
+        <controls:OptionControl Header="Performance Profile" Description="Apply a coordinated batch of FastFlags. 'Default' clears every flag this fork manages (your other flags are untouched).">
+            <StackPanel Orientation="Horizontal">
+                <ComboBox Margin="5,0,0,0" Padding="10,5,10,5" Width="240"
+                           ItemsSource="{Binding PerformancePresetOptions, Mode=OneTime}"
+                           SelectedValue="{Binding SelectedPerformancePreset, Mode=TwoWay}"
+                           SelectedValuePath="Key"
+                           DisplayMemberPath="Value" />
+            </StackPanel>
+        </controls:OptionControl>
+
         <controls:OptionControl 
-            Header="{x:Static resources:Strings.Menu_FastFlags_ManagerEnabled_Title}"
+            Header="{x:Static resources:Strings.Menu_FastFlags_ManagerEnabled_Title}
             Description="{x:Static resources:Strings.Menu_FastFlags_ManagerEnabled_Description}">
             <ui:ToggleSwitch IsChecked="{Binding UseFastFlagManager, Mode=TwoWay}" />
         </controls:OptionControl>
