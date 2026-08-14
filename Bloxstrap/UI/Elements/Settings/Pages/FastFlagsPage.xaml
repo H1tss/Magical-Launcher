@@ -1,0 +1,167 @@
+<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.FastFlagsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:models="clr-namespace:Bloxstrap.UI.ViewModels"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:resources="clr-namespace:Bloxstrap.Resources"
+      xmlns:controls="clr-namespace:Bloxstrap.UI.Elements.Controls"
+      mc:Ignorable="d"
+      d:DesignHeight="2600" d:DesignWidth="800"
+      Title="FastFlagsPage"
+      Scrollable="True"
+      Loaded="Page_Loaded">
+    <StackPanel Margin="0,0,14,14">
+        <TextBlock Margin="0,0,0,16" Text="{x:Static resources:Strings.Menu_FastFlags_Description}" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+
+        <!-- ===================== Performance Presets ===================== -->
+        <TextBlock Text="⚡ Performance Presets" FontSize="20" FontWeight="Medium" Margin="0,0,0,0" />
+        <TextBlock Text="One-click profiles that tune rendering, geometry, grass and engine flags for your hardware. Fine-tune individual options below after applying a preset." FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,8" TextWrapping="Wrap" />
+
+        <controls:OptionControl Header="Performance Profile" Description="Apply a coordinated batch of FastFlags. 'Default' clears every flag this fork manages (your other flags are untouched).">
+            <StackPanel Orientation="Horizontal">
+                <ComboBox Margin="5,0,0,0" Padding="10,5,10,5" Width="240"
+                           ItemsSource="{Binding PerformancePresetLabels}"
+                           SelectedItem="{Binding SelectedPerformancePresetLabel, Mode=TwoWay}" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <controls:OptionControl 
+            Header="{x:Static resources:Strings.Menu_FastFlags_ManagerEnabled_Title}"
+            Description="{x:Static resources:Strings.Menu_FastFlags_ManagerEnabled_Description}">
+            <ui:ToggleSwitch IsChecked="{Binding UseFastFlagManager, Mode=TwoWay}" />
+        </controls:OptionControl>
+
+        <TextBlock Text="{x:Static resources:Strings.Common_Presets}" FontSize="20" FontWeight="Medium" Margin="0,16,0,0" />
+
+        <TextBlock Text="{x:Static resources:Strings.Menu_FastFlags_Presets_Categories_Rendering}" FontSize="16" FontWeight="Medium" Margin="0,16,0,0" />
+        <controls:MarkdownTextBlock MarkdownText="{Binding Source={x:Static resources:Strings.Menu_FastFlags_Presets_D3DExclusiveFullscreenInfo}, Converter={StaticResource StringFormatConverter}, ConverterParameter='https://bloxstraplabs.com/wiki/features/engine-settings/#exclusive-fullscreen'}"  Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+
+        <controls:OptionControl 
+            Header="{x:Static resources:Strings.Menu_FastFlags_Presets_MSAA_Title}">
+            <ComboBox Margin="5,0,0,0" Padding="10,5,10,5" Width="200"
+                      ItemsSource="{Binding MSAALevelLabels}"
+                      SelectedItem="{Binding SelectedMSAALevelLabel, Mode=TwoWay}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl 
+            Header="{x:Static resources:Strings.Menu_FastFlags_Presets_FixDisplayScaling_Title}" 
+            Description="{x:Static resources:Strings.Menu_FastFlags_Presets_FixDisplayScaling_Description}" 
+            HelpLink="https://bloxstraplabs.com/wiki/features/engine-settings/#preserving-rendering-quality">
+            <ui:ToggleSwitch IsChecked="{Binding FixDisplayScaling, Mode=TwoWay}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl 
+            Header="{x:Static resources:Strings.Menu_FastFlags_Presets_TextureQuality_Title}">
+            <ComboBox Margin="5,0,0,0" Padding="10,5,10,5" Width="200"
+                      ItemsSource="{Binding TextureQualityLabels}"
+                      SelectedItem="{Binding SelectedTextureQualityLabel, Mode=TwoWay}" />
+        </controls:OptionControl>
+
+        <!-- ===================== Geometry ===================== -->
+        <TextBlock Text="Geometry" FontSize="20" FontWeight="Medium" Margin="0,24,0,0" />
+        <TextBlock Text="CSG level-of-detail switching distances. -1 means &quot;use Roblox default&quot;." FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,8" TextWrapping="Wrap" />
+
+        <controls:OptionControl Header="CSG LOD Switching Distance">
+            <StackPanel Orientation="Horizontal">
+                <Slider Width="220" Minimum="-1" Maximum="2000" Value="{Binding CSGLodSwitchingDistance, Mode=TwoWay}" />
+                <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Width="40" Text="{Binding CSGLodSwitchingDistance}" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="CSG LOD Switching Distance (L1-L2)">
+            <StackPanel Orientation="Horizontal">
+                <Slider Width="220" Minimum="-1" Maximum="2000" Value="{Binding CSGLodSwitchingDistanceL12, Mode=TwoWay}" />
+                <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Width="40" Text="{Binding CSGLodSwitchingDistanceL12}" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="CSG LOD Switching Distance (L2-L3)">
+            <StackPanel Orientation="Horizontal">
+                <Slider Width="220" Minimum="-1" Maximum="2000" Value="{Binding CSGLodSwitchingDistanceL23, Mode=TwoWay}" />
+                <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Width="40" Text="{Binding CSGLodSwitchingDistanceL23}" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="CSG LOD Switching Distance (L3-L4)">
+            <StackPanel Orientation="Horizontal">
+                <Slider Width="220" Minimum="-1" Maximum="2000" Value="{Binding CSGLodSwitchingDistanceL34, Mode=TwoWay}" />
+                <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Width="40" Text="{Binding CSGLodSwitchingDistanceL34}" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <!-- ===================== Rendering (advanced) ===================== -->
+        <TextBlock Text="Rendering (Advanced)" FontSize="20" FontWeight="Medium" Margin="0,24,0,0" />
+
+        <controls:OptionControl Header="Prefer Direct3D 11" Description="Force the Direct3D 11 rendering backend.">
+            <ui:ToggleSwitch IsChecked="{Binding PreferD3D11, Mode=TwoWay, FallbackValue=False}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Prefer Vulkan" Description="Force the Vulkan rendering backend.">
+            <ui:ToggleSwitch IsChecked="{Binding PreferVulkan, Mode=TwoWay, FallbackValue=False}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Prefer OpenGL" Description="Force the OpenGL rendering backend.">
+            <ui:ToggleSwitch IsChecked="{Binding PreferOpenGL, Mode=TwoWay, FallbackValue=False}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Force Gray Sky" Description="Replaces the sky with a flat gray color, useful for debugging.">
+            <ui:ToggleSwitch IsChecked="{Binding DebugSkyGray, Mode=TwoWay, FallbackValue=False}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Pause Voxelizer" Description="Pauses terrain voxelization.">
+            <ui:ToggleSwitch IsChecked="{Binding DebugPauseVoxelizer, Mode=TwoWay, FallbackValue=False}" />
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="FRM Quality Level Override">
+            <StackPanel Orientation="Horizontal">
+                <Slider Width="220" Minimum="-1" Maximum="21" Value="{Binding DebugFRMQualityLevelOverride, Mode=TwoWay}" />
+                <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Width="40" Text="{Binding DebugFRMQualityLevelOverride}" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Max Grass Distance">
+            <StackPanel Orientation="Horizontal">
+                <Slider Width="220" Minimum="-1" Maximum="4000" Value="{Binding FRMMaxGrassDistance, Mode=TwoWay}" />
+                <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Width="40" Text="{Binding FRMMaxGrassDistance}" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <controls:OptionControl Header="Min Grass Distance">
+            <StackPanel Orientation="Horizontal">
+                <Slider Width="220" Minimum="-1" Maximum="4000" Value="{Binding FRMMinGrassDistance, Mode=TwoWay}" />
+                <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Width="40" Text="{Binding FRMMinGrassDistance}" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <!-- ===================== UI ===================== -->
+        <TextBlock Text="UI" FontSize="20" FontWeight="Medium" Margin="0,24,0,0" />
+
+        <controls:OptionControl Header="Grass Movement Reduced-Motion Factor">
+            <StackPanel Orientation="Horizontal">
+                <Slider Width="220" Minimum="-1" Maximum="100" Value="{Binding GrassMovementReducedMotionFactor, Mode=TwoWay}" />
+                <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Width="40" Text="{Binding GrassMovementReducedMotionFactor}" />
+            </StackPanel>
+        </controls:OptionControl>
+
+        <controls:OptionControl 
+            Margin="0,24,0,0"
+            Header="{x:Static resources:Strings.Menu_FastFlags_Reset_Title}">
+            <ui:ToggleSwitch IsChecked="{Binding ResetConfiguration, Mode=TwoWay}" />
+        </controls:OptionControl>
+
+        <ui:CardAction Margin="0,8,0,0" Icon="EditSettings24" Command="{Binding OpenFastFlagEditorCommand}" Visibility="{Binding CanShowFastFlagEditor}">
+            <StackPanel>
+                <TextBlock FontSize="14" Text="{x:Static resources:Strings.Menu_FastFlagEditor_Title}" />
+                <TextBlock Margin="0,2,0,0" FontSize="12" Text="{x:Static resources:Strings.Menu_FastFlags_Editor_Description}" Padding="0,0,16,0"  Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+            </StackPanel>
+        </ui:CardAction>
+
+        <TextBlock Margin="0,16,0,0" Text="✨ Magical Allowlisted Flags" FontSize="16" FontWeight="Medium"/>
+        <TextBlock Text="Click to copy all 18 official Roblox FFlags to clipboard" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,4,0,8"/>
+        <Button x:Name="LoadAllowlistedButton" Content="Copy Allowlisted Flags" Click="LoadAllowlistedButton_Click" HorizontalAlignment="Left" Padding="16,8,16,8"/>
+        <TextBlock x:Name="LoadStatusText" Margin="0,8,0,0" Visibility="Collapsed" FontWeight="SemiBold" Foreground="LimeGreen"/>
+
+    </StackPanel>
+</ui:UiPage>

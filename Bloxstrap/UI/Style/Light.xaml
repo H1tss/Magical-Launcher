@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="NewTextEditorBackground" Color="White" />
+    <SolidColorBrush x:Key="NewTextEditorForeground" Color="Black" />
+    <SolidColorBrush x:Key="NewTextEditorLink" Color="Blue" />
+    
+    <!-- Unicorn Theme Resources -->
+    <ImageBrush x:Key="UnicornBackgroundBrush" ImageSource="pack://application:,,,/Resources/UnicornWallpaper.jpg" Stretch="UniformToFill" Opacity="0.12" />
+    <SolidColorBrush x:Key="UnicornCardBackground" Color="#F5F5F5" Opacity="0.7" />
+    <SolidColorBrush x:Key="UnicornAccentPink" Color="#FF69B4" />
+    <SolidColorBrush x:Key="UnicornAccentLavender" Color="#9370DB" />
+    <SolidColorBrush x:Key="UnicornAccentMint" Color="#3CB371" />
+</ResourceDictionary>

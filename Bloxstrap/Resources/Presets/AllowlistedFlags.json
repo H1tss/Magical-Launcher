@@ -1,0 +1,30 @@
+{
+  "name": "Allowlisted FFlags",
+  "description": "All officially allowlisted Roblox FFlags",
+  "flags": {
+    "Geometry": {
+      "DFIntCSGLevelOfDetailSwitchingDistance": 0,
+      "DFIntCSGLevelOfDetailSwitchingDistanceL12": 0,
+      "DFIntCSGLevelOfDetailSwitchingDistanceL23": 0,
+      "DFIntCSGLevelOfDetailSwitchingDistanceL34": 0
+    },
+    "Rendering": {
+      "FFlagHandleAltEnterFullscreenManually": true,
+      "DFFlagTextureQualityOverrideEnabled": false,
+      "DFIntTextureQualityOverride": 3,
+      "FIntDebugForceMSAASamples": 4,
+      "DFFlagDisableDPIScale": false,
+      "FFlagDebugGraphicsPreferD3D11": false,
+      "FFlagDebugSkyGray": false,
+      "DFFlagDebugPauseVoxelizer": false,
+      "DFIntDebugFRMQualityLevelOverride": 10,
+      "FIntFRMMaxGrassDistance": 1000,
+      "FIntFRMMinGrassDistance": 0,
+      "FFlagDebugGraphicsPreferVulkan": false,
+      "FFlagDebugGraphicsPreferOpenGL": false
+    },
+    "User Interface": {
+      "FIntGrassMovementReducedMotionFactor": 0
+    }
+  }
+}
