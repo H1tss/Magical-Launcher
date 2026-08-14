@@ -1,0 +1,41 @@
+<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.LogViewerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d"
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="LogViewerPage"
+      Loaded="Page_Loaded">
+    <StackPanel Margin="0,0,14,14">
+        <Grid Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Log Viewer" FontSize="24" FontWeight="Medium" Foreground="#FF69B4" />
+                <TextBlock Text="View and export Magical Launcher log files." FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <ui:Button Content="Refresh" Icon="ArrowSync24" Click="Refresh_Click" Margin="0,0,8,0" />
+                <ui:Button Content="Open Log Folder" Icon="FolderOpen24" Click="OpenFolder_Click" />
+            </StackPanel>
+        </Grid>
+
+        <ListView x:Name="LogList" MaxHeight="150" Margin="0,0,0,8" SelectionChanged="LogList_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding FileName}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ui:Card>
+            <ScrollViewer MaxHeight="350" VerticalScrollBarVisibility="Auto">
+                <TextBox x:Name="LogContent" IsReadOnly="True" TextWrapping="Wrap" Background="Transparent" BorderThickness="0" FontFamily="Consolas" FontSize="12" />
+            </ScrollViewer>
+        </ui:Card>
+    </StackPanel>
+</ui:UiPage>

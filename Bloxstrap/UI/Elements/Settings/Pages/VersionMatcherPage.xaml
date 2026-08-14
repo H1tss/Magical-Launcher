@@ -1,0 +1,208 @@
+<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.VersionMatcherPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:resources="clr-namespace:Bloxstrap.Resources"
+      mc:Ignorable="d"
+      d:DesignHeight="800" d:DesignWidth="800"
+      Title="VersionMatcherPage"
+      Scrollable="True"
+      Loaded="Page_Loaded">
+    <StackPanel Margin="0,0,14,14">
+        <TextBlock Text="Version Matcher" FontSize="24" FontWeight="Medium" Margin="0,0,0,4" Foreground="#FF69B4" />
+        <TextBlock Text="Stay on a specific Roblox version. View current, future, and past versions from the WEAO API." FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,0,0,16" />
+
+        <!-- Status -->
+        <TextBlock x:Name="StatusText" Margin="0,0,0,12" FontWeight="SemiBold" Visibility="Collapsed" TextWrapping="Wrap" />
+
+        <!-- Current Version Card -->
+        <ui:CardExpander IsExpanded="True" Margin="0,0,0,8">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="16" FontWeight="Medium" Text="Current Versions (LIVE)" />
+                    <TextBlock FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" Text="The latest Roblox versions deployed to each platform" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,4,16,4" FontWeight="Medium" Text="Windows" />
+                <TextBlock x:Name="CurrentWindows" Grid.Row="0" Grid.Column="1" Margin="0,4,0,4" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Loading..." />
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,4,16,4" FontWeight="Medium" Text="Mac" />
+                <TextBlock x:Name="CurrentMac" Grid.Row="1" Grid.Column="1" Margin="0,4,0,4" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Loading..." />
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,4,16,4" FontWeight="Medium" Text="Android" />
+                <TextBlock x:Name="CurrentAndroid" Grid.Row="2" Grid.Column="1" Margin="0,4,0,4" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Loading..." />
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,4,16,4" FontWeight="Medium" Text="iOS" />
+                <TextBlock x:Name="CurrentIOS" Grid.Row="3" Grid.Column="1" Margin="0,4,0,4" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Loading..." />
+            </Grid>
+        </ui:CardExpander>
+
+        <!-- Future Version Card -->
+        <ui:CardExpander Margin="0,0,0,8">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="16" FontWeight="Medium" Text="Future Versions" />
+                    <TextBlock FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" Text="Upcoming versions that Roblox may deploy next" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,4,16,4" FontWeight="Medium" Text="Windows" />
+                <TextBlock x:Name="FutureWindows" Grid.Row="0" Grid.Column="1" Margin="0,4,0,4" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Loading..." />
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,4,16,4" FontWeight="Medium" Text="Mac" />
+                <TextBlock x:Name="FutureMac" Grid.Row="1" Grid.Column="1" Margin="0,4,0,4" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Loading..." />
+            </Grid>
+        </ui:CardExpander>
+
+        <!-- Past Version Card -->
+        <ui:CardExpander Margin="0,0,0,8">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="16" FontWeight="Medium" Text="Past Versions" />
+                    <TextBlock FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" Text="Previous versions useful for downgrading" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,4,16,4" FontWeight="Medium" Text="Windows" />
+                <TextBlock x:Name="PastWindows" Grid.Row="0" Grid.Column="1" Margin="0,4,0,4" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Loading..." />
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,4,16,4" FontWeight="Medium" Text="Mac" />
+                <TextBlock x:Name="PastMac" Grid.Row="1" Grid.Column="1" Margin="0,4,0,4" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Loading..." />
+            </Grid>
+        </ui:CardExpander>
+
+        <!-- Match Version Section -->
+        <ui:Card Margin="0,8,0,0">
+            <StackPanel>
+                <TextBlock FontSize="16" FontWeight="Medium" Text="Match a Version" Margin="0,0,0,4" />
+                <TextBlock FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" TextWrapping="Wrap" Margin="0,0,0,8" Text="Enter a version string to lock Magical Launcher to that specific Roblox version." />
+                <StackPanel Orientation="Horizontal">
+                    <ui:TextBox x:Name="VersionInput" Width="400" PlaceholderText="e.g. version-31fc142272764f02" Margin="0,0,8,0" />
+                    <ui:Button x:Name="MatchVersionBtn" Content="Match" Icon="Link24" Click="MatchVersionButton_Click" />
+                </StackPanel>
+                <TextBlock x:Name="MatchStatus" Margin="0,8,0,0" FontSize="12" Visibility="Collapsed" TextWrapping="Wrap" />
+            </StackPanel>
+        </ui:Card>
+
+        <!-- Your Version Card -->
+        <ui:Card Margin="0,8,0,0">
+            <StackPanel>
+                <TextBlock FontSize="16" FontWeight="Medium" Text="Your Bootstrapper Version" Margin="0,0,0,4" />
+                <TextBlock x:Name="BootstrapperVersion" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Loading..." />
+            </StackPanel>
+        </ui:Card>
+
+        <!-- Windows Exploits Section -->
+        <ui:CardExpander Margin="0,16,0,8">
+            <ui:CardExpander.Header>
+                <StackPanel>
+                    <TextBlock FontSize="16" FontWeight="Medium" Text="Windows Exploits" Foreground="#FF69B4" />
+                    <TextBlock FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" Text="Track which Windows exploits are updated for the current Roblox version" />
+                </StackPanel>
+            </ui:CardExpander.Header>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <ui:Button x:Name="RefreshExploitsBtn" Content="Refresh" Icon="ArrowSync24" Click="RefreshExploitsButton_Click" Margin="0,0,8,0" />
+                    <ui:TextBox x:Name="ExploitFilterInput" Width="250" PlaceholderText="Filter by name..." Margin="0,0,8,0" TextChanged="ExploitFilter_TextChanged" />
+                    <CheckBox x:Name="ShowUpdatedOnly" Content="Updated Only" VerticalAlignment="Center" Checked="Filter_Changed" Unchecked="Filter_Changed" />
+                    <CheckBox x:Name="ShowFreeOnly" Content="Free Only" VerticalAlignment="Center" Margin="12,0,0,0" Checked="Filter_Changed" Unchecked="Filter_Changed" />
+                </StackPanel>
+
+                <Grid Margin="0,0,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="70" />
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="160" />
+                        <ColumnDefinition Width="140" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Name" FontWeight="Bold" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                    <TextBlock Grid.Column="1" Text="Version" FontWeight="Bold" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                    <TextBlock Grid.Column="2" Text="Status" FontWeight="Bold" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                    <TextBlock Grid.Column="3" Text="Detected" FontWeight="Bold" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                    <TextBlock Grid.Column="4" Text="UNC" FontWeight="Bold" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                    <TextBlock Grid.Column="5" Text="Free" FontWeight="Bold" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                    <TextBlock Grid.Column="6" Text="Roblox Ver" FontWeight="Bold" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                    <TextBlock Grid.Column="7" Text="Updated" FontWeight="Bold" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                </Grid>
+
+                <ListView x:Name="ExploitsList" MaxHeight="400" Margin="0,0,0,8">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="60" />
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="160" />
+                                    <ColumnDefinition Width="140" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Title}" FontWeight="Medium" />
+                                <TextBlock Grid.Column="1" Text="{Binding Version}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Grid.Column="2" Text="{Binding StatusText}" FontWeight="Medium">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsUpdated}" Value="True">
+                                                    <Setter Property="Foreground" Value="LimeGreen" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsUpdated}" Value="False">
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Grid.Column="3" Text="{Binding DetectedText}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Grid.Column="4" Text="{Binding UncText}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Grid.Column="5" Text="{Binding FreeText}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Grid.Column="6" Text="{Binding RobloxVersion}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="11" />
+                                <TextBlock Grid.Column="7" Text="{Binding UpdatedDate}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="11" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <TextBlock x:Name="ExploitsStatus" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,4" />
+            </StackPanel>
+        </ui:CardExpander>
+    </StackPanel>
+</ui:UiPage>

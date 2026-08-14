@@ -56,17 +56,53 @@
 
             <ui:NavigationFluent x:Name="RootNavigation" Grid.Row="1" Grid.Column="0" Margin="0,0,12,0" Frame="{Binding ElementName=RootFrame}" SelectedPageIndex="0">
                 <ui:NavigationFluent.Items>
-                    <ui:NavigationItem Content="{x:Static resources:Strings.Menu_Integrations_Title}" PageType="{x:Type pages:IntegrationsPage}" Icon="Add28" Tag="integrations" />
+                    <ui:NavigationItem Content="Home" PageType="{x:Type pages:BloxstrapPage}" Icon="Home24" Tag="home" />
+                    <ui:NavigationItem Content="News" PageType="{x:Type pages:NewsPage}" Icon="News24" Tag="news" />
+
+                    <ui:NavigationHeader Text="LAUNCH" />
                     <ui:NavigationItem Content="{x:Static resources:Strings.Menu_Behaviour_Title}" PageType="{x:Type pages:BehaviourPage}" Icon="PlaySettings20" Tag="bootstrapper" />
+                    <ui:NavigationItem Content="{x:Static resources:Strings.Menu_Integrations_Title}" PageType="{x:Type pages:IntegrationsPage}" Icon="Add28" Tag="integrations" />
+                    <ui:NavigationItem Content="{x:Static resources:Strings.Common_Shortcuts}" PageType="{x:Type pages:ShortcutsPage}" Icon="Apps28" Tag="shortcuts" />
+                    <ui:NavigationItem Content="Quick Launch" PageType="{x:Type pages:QuickLaunchPage}" Icon="Pin24" Tag="quicklaunch" />
+                    <ui:NavigationItem Content="Launch Args" PageType="{x:Type pages:LaunchArgsPage}" Icon="WindowConsole20" Tag="launchargs" />
+                    <ui:NavigationItem Content="FPS Unlocker" PageType="{x:Type pages:FpsUnlockerPage}" Icon="TopSpeed24" Tag="fpsunlocker" />
+                    <ui:NavigationItem Content="Auto Close" PageType="{x:Type pages:AutoClosePage}" Icon="Dismiss24" Tag="autoclose" />
+
+                    <ui:NavigationHeader Text="VERSIONS" />
+                    <ui:NavigationItem Content="Version Downgrader" PageType="{x:Type pages:VersionDowngraderPage}" Icon="ArrowCircleDown48" Tag="downgrader" />
+                    <ui:NavigationItem Content="Version Matcher" PageType="{x:Type pages:VersionMatcherPage}" Icon="ArrowSync24" Tag="versionmatcher" />
+                    <ui:NavigationItem Content="Auto Updater" PageType="{x:Type pages:AutoUpdaterPage}" Icon="ArrowSync24" Tag="autoupdater" />
+                    <ui:NavigationItem Content="Server Region" PageType="{x:Type pages:ServerRegionPage}" Icon="Globe24" Tag="serverregion" />
+                    <ui:NavigationItem Content="Server Browser" PageType="{x:Type pages:ServerBrowserPage}" Icon="Globe24" Tag="serverbrowser" />
+
+                    <ui:NavigationHeader Text="ACCOUNTS" />
+                    <ui:NavigationItem Content="Multi-Instance" PageType="{x:Type pages:MultiInstancePage}" Icon="Apps24" Tag="multiinstance" />
+                    <ui:NavigationItem Content="Alt Generator" PageType="{x:Type pages:AltGenPage}" Icon="PersonAdd24" Tag="altgen" />
+                    <ui:NavigationItem Content="Ban Trace Cleanup" PageType="{x:Type pages:BanAsyncPage}" Icon="Shield24" Tag="banasync" />
+
+                    <ui:NavigationHeader Text="CUSTOMIZATION" />
                     <ui:NavigationItem Content="{x:Static resources:Strings.Menu_Mods_Title}" PageType="{x:Type pages:ModsPage}" Icon="WrenchScrewdriver20" Tag="mods" />
                     <ui:NavigationItem Content="{x:Static resources:Strings.Menu_FastFlags_Title}" PageType="{x:Type pages:FastFlagsPage}" Icon="Flag24" Tag="fastflags" />
                     <ui:NavigationItem Content="{x:Static resources:Strings.Menu_Appearance_Title}" PageType="{x:Type pages:AppearancePage}" Icon="PaintBrush24" Tag="appearance" />
-                    <ui:NavigationItem Content="{x:Static resources:Strings.Common_Shortcuts}" PageType="{x:Type pages:ShortcutsPage}" Icon="Apps28" Tag="shortcuts" />
+                    <ui:NavigationItem Content="Mod Store" PageType="{x:Type pages:ModMarketplacePage}" Icon="ShoppingBag24" Tag="modmarketplace" />
+
+                    <ui:NavigationHeader Text="TOOLS" />
+                    <ui:NavigationItem Content="Discord RPC" PageType="{x:Type pages:DiscordRpcPage}" Icon="Chat48" Tag="discordrpc" />
+                    <ui:NavigationItem Content="Game History" PageType="{x:Type pages:GameHistoryPage}" Icon="History24" Tag="gamehistory" />
+                    <ui:NavigationItem Content="Link Bypasser" PageType="{x:Type pages:LinkBypasserPage}" Icon="Link24" Tag="linkbypasser" />
+                    <ui:NavigationItem Content="Log Viewer" PageType="{x:Type pages:LogViewerPage}" Icon="DocumentCatchUp20" Tag="logviewer" />
+                    <ui:NavigationItem Content="Diagnostics" PageType="{x:Type pages:ConnectionDiagnosticsPage}" Icon="NetworkCheck24" Tag="diagnostics" />
+                    <ui:NavigationItem Content="Activity" PageType="{x:Type pages:ActivityDashboardPage}" Icon="ChartPerson24" Tag="activity" />
+                    <ui:NavigationItem Content="Shortcuts" PageType="{x:Type pages:KeyboardShortcutsPage}" Icon="Keyboard24" Tag="kbshortcuts" />
+                    <ui:NavigationItem Content="Notifications" PageType="{x:Type pages:NotificationPrefsPage}" Icon="Info20" Tag="notifications" />
+                    <ui:NavigationItem Content="Migration" PageType="{x:Type pages:MigrationToolPage}" Icon="ArrowImport24" Tag="migration" />
+                    <ui:NavigationItem Content="Portable Mode" PageType="{x:Type pages:PortableModePage}" Icon="FolderOpen24" Tag="portable" />
+                    <ui:NavigationItem Content="Language" PageType="{x:Type pages:LanguageSelectorPage}" Icon="Translate24" Tag="language" />
 
                     <ui:NavigationItem Content="{x:Static resources:Strings.Menu_FastFlagEditor_Title}" PageType="{x:Type pages:FastFlagEditorPage}" Tag="fastflageditor" Visibility="Collapsed" />
                 </ui:NavigationFluent.Items>
                 <ui:NavigationFluent.Footer>
-                    <ui:NavigationItem Content="Bloxstrap" PageType="{x:Type pages:BloxstrapPage}" Icon="Settings24" Tag="shortcuts" />
+                    <ui:NavigationItem Content="Settings" PageType="{x:Type pages:BloxstrapPage}" Icon="Settings24" Tag="settings" />
                     <ui:NavigationItem Content="{x:Static resources:Strings.Menu_About_Title}" Icon="QuestionCircle48" Margin="0,0,0,12" Command="{Binding OpenAboutCommand, Mode=OneTime}" />
                 </ui:NavigationFluent.Footer>
             </ui:NavigationFluent>

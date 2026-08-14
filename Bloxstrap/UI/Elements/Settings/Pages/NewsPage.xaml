@@ -1,0 +1,54 @@
+<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.NewsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      Title="NewsPage">
+
+    <Grid Margin="24">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Margin="0,0,16,0">
+            <TextBlock Text="Roblox News" FontSize="24" FontWeight="Medium" Margin="0,0,0,4" Foreground="#FF69B4" />
+            <TextBlock Text="Latest from Roblox DevForum" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,12" />
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                <ui:Button Content="Refresh" Click="RefreshNews_Click" Margin="0,0,8,0" />
+                <ui:Button Content="Open DevForum" Click="OpenDevForum_Click" />
+            </StackPanel>
+
+            <ListBox x:Name="NewsList" Height="400" FontSize="12">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,4">
+                            <TextBlock Text="{Binding Title}" FontWeight="SemiBold" TextWrapping="Wrap" />
+                            <TextBlock Text="{Binding Excerpt}" TextWrapping="Wrap" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="11" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="Release Notes" FontSize="24" FontWeight="Medium" Margin="0,0,0,4" Foreground="#FF69B4" />
+            <TextBlock Text="Magical Launcher updates" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,12" />
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                <ui:Button Content="Check Updates" Appearance="Primary" Click="CheckUpdates_Click" />
+            </StackPanel>
+
+            <ListBox x:Name="ReleaseList" Height="400" FontSize="12">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,4">
+                            <TextBlock Text="{Binding Version}" FontWeight="SemiBold" Foreground="#FF69B4" />
+                            <TextBlock Text="{Binding Notes}" TextWrapping="Wrap" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="11" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</ui:UiPage>

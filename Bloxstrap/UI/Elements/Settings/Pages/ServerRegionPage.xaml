@@ -1,0 +1,42 @@
+<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.ServerRegionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d"
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="ServerRegionPage"
+      Loaded="Page_Loaded">
+    <StackPanel Margin="0,0,14,14">
+        <TextBlock Text="Server Region" FontSize="24" FontWeight="Medium" Margin="0,0,0,4" Foreground="#FF69B4" />
+        <TextBlock Text="Choose which Roblox server region to connect to." FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,0,0,16" />
+
+        <ui:Card Margin="0,0,0,8">
+            <StackPanel>
+                <TextBlock FontSize="16" FontWeight="Medium" Text="Preferred Region" Margin="0,0,0,4" />
+                <TextBlock FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" Text="Select your preferred server region. Roblox may still connect to other regions if needed." Margin="0,0,0,8" />
+                <ComboBox x:Name="RegionCombo" Width="200">
+                    <ComboBoxItem Content="Auto (Default)" Tag="auto" IsSelected="True" />
+                    <ComboBoxItem Content="United States" Tag="us" />
+                    <ComboBoxItem Content="Europe" Tag="eu" />
+                    <ComboBoxItem Content="Asia" Tag="asia" />
+                    <ComboBoxItem Content="Australia" Tag="au" />
+                    <ComboBoxItem Content="South America" Tag="sa" />
+                    <ComboBoxItem Content="Japan" Tag="jp" />
+                </ComboBox>
+            </StackPanel>
+        </ui:Card>
+
+        <ui:Card Margin="0,0,0,8">
+            <StackPanel>
+                <TextBlock FontSize="16" FontWeight="Medium" Text="Force Region" Margin="0,0,0,4" />
+                <TextBlock FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" Text="Force connection to the selected region (may increase latency if far away)" Margin="0,0,0,8" />
+                <ui:ToggleSwitch x:Name="ForceRegionToggle" IsChecked="False" />
+            </StackPanel>
+        </ui:Card>
+
+        <ui:Button Content="Save" Icon="Save24" Margin="0,8,0,0" Click="Save_Click" />
+        <TextBlock x:Name="RegionStatus" Margin="0,8,0,0" FontWeight="SemiBold" Visibility="Collapsed" />
+    </StackPanel>
+</ui:UiPage>

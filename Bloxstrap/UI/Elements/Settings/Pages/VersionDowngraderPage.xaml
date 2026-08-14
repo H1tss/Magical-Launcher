@@ -1,0 +1,54 @@
+<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.VersionDowngraderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:controls="clr-namespace:Bloxstrap.UI.Elements.Controls"
+      xmlns:resources="clr-namespace:Bloxstrap.Resources"
+      mc:Ignorable="d"
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="VersionDowngraderPage"
+      Loaded="Page_Loaded">
+    <StackPanel Margin="0,0,14,14">
+        <TextBlock Text="Version Downgrader" FontSize="24" FontWeight="Medium" Margin="0,0,0,4" />
+        <TextBlock Text="Install a specific Roblox version by entering its GUID hash. The Roblox CDN serves versions by content hash, so any version can be downloaded as long as you know its identifier." FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,0,0,16" />
+
+        <TextBlock Text="Version GUID / Hash" FontSize="14" FontWeight="Medium" Margin="0,0,0,4" />
+        <TextBlock Text="Paste a Roblox version GUID to install a specific client version." FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,8" />
+        <StackPanel Orientation="Horizontal">
+            <ui:TextBox x:Name="VersionGuidInput" Width="400" PlaceholderText="e.g. version-abc123def456" Margin="0,0,8,0" />
+            <ui:Button x:Name="InstallVersionBtn" Content="Install" Icon="ArrowCircleRight48" Click="InstallVersionButton_Click" />
+        </StackPanel>
+
+        <TextBlock x:Name="StatusText" Margin="0,12,0,0" FontWeight="SemiBold" Visibility="Collapsed" TextWrapping="Wrap" />
+
+        <TextBlock Text="Installed Versions" FontSize="20" FontWeight="Medium" Margin="0,24,0,0" />
+        <TextBlock Text="Versions currently installed on your system. You can launch any of these." FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,4,0,8" />
+
+        <ListView x:Name="InstalledVersionsList" MaxHeight="300" Margin="0,0,0,12">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{Binding Guid}" FontWeight="Medium" />
+                            <TextBlock Text="{Binding DisplayText}" FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                        </StackPanel>
+                        <ui:Button Grid.Column="1" Content="Delete" Icon="Delete28" Appearance="Danger" Click="DeleteVersionButton_Click" Tag="{Binding Guid}" Padding="8,4" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock Text="How to find a version GUID" FontSize="16" FontWeight="Medium" Margin="0,12,0,0" />
+        <TextBlock TextWrapping="Wrap" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,0">
+            <Run FontWeight="SemiBold">1.</Run> Go to <Hyperlink NavigateUri="https://clientsettings.roblox.com/v2/client-version/WindowsPlayer/channel/LIVE">clientsettings.roblox.com</Hyperlink><LineBreak />
+            <Run FontWeight="SemiBold">2.</Run> The "clientVersionUpload" field contains the GUID.<LineBreak />
+            <Run FontWeight="SemiBold">3.</Run> Paste it above and click Install.
+        </TextBlock>
+    </StackPanel>
+</ui:UiPage>

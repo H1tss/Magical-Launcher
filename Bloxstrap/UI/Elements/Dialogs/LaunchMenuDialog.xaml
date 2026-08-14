@@ -9,7 +9,7 @@
         xmlns:models="clr-namespace:Bloxstrap.UI.ViewModels"
         xmlns:resources="clr-namespace:Bloxstrap.Resources"
         mc:Ignorable="d"
-        Title="Bloxstrap"
+        Title="Magical Launcher"
         MinWidth="0"
         MinHeight="0"
         Width="580"
@@ -24,13 +24,92 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ui:TitleBar Grid.Row="0" Grid.ColumnSpan="2" Padding="8" ShowMinimize="False" ShowMaximize="False" Title="Bloxstrap" Icon="pack://application:,,,/Bloxstrap.ico" CanMaximize="False" KeyboardNavigation.TabNavigation="None" />
+        <ui:TitleBar Grid.Row="0" Grid.ColumnSpan="2" Padding="8" ShowMinimize="False" ShowMaximize="False" Title="Magical Launcher" Icon="pack://application:,,,/Bloxstrap.ico" CanMaximize="False" KeyboardNavigation.TabNavigation="None" />
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="280" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+
+            <!-- Sparkle particles -->
+            <Canvas Grid.ColumnSpan="2" IsHitTestVisible="False" ClipToBounds="True" Opacity="0.6">
+                <Ellipse Canvas.Left="50" Canvas.Top="35" Width="3" Height="3" Fill="#FF69B4">
+                    <Ellipse.RenderTransform><RotateTransform /></Ellipse.RenderTransform>
+                    <Ellipse.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever">
+                                    <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" From="35" To="-5" Duration="0:0:4" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0" To="1" Duration="0:0:1" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="1" To="0" Duration="0:0:1" BeginTime="0:0:3" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" From="0" To="360" Duration="0:0:4" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Ellipse.Triggers>
+                </Ellipse>
+                <Ellipse Canvas.Left="180" Canvas.Top="55" Width="2" Height="2" Fill="#E6E6FA">
+                    <Ellipse.RenderTransform><RotateTransform /></Ellipse.RenderTransform>
+                    <Ellipse.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever">
+                                    <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" From="55" To="10" Duration="0:0:5" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0" To="0.8" Duration="0:0:1.2" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0.8" To="0" Duration="0:0:1.2" BeginTime="0:0:3.8" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" From="0" To="-360" Duration="0:0:5" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Ellipse.Triggers>
+                </Ellipse>
+                <Ellipse Canvas.Left="350" Canvas.Top="70" Width="2" Height="2" Fill="#FFB6C1">
+                    <Ellipse.RenderTransform><RotateTransform /></Ellipse.RenderTransform>
+                    <Ellipse.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever">
+                                    <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" From="70" To="25" Duration="0:0:4.5" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0" To="0.7" Duration="0:0:1" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0.7" To="0" Duration="0:0:1" BeginTime="0:0:3.5" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" From="0" To="180" Duration="0:0:4.5" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Ellipse.Triggers>
+                </Ellipse>
+                <Ellipse Canvas.Left="480" Canvas.Top="40" Width="2" Height="2" Fill="#98FF98">
+                    <Ellipse.RenderTransform><RotateTransform /></Ellipse.RenderTransform>
+                    <Ellipse.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever">
+                                    <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" From="40" To="-5" Duration="0:0:5.5" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0" To="0.6" Duration="0:0:1.5" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0.6" To="0" Duration="0:0:1.5" BeginTime="0:0:4" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" From="0" To="-180" Duration="0:0:5.5" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Ellipse.Triggers>
+                </Ellipse>
+                <TextBlock Canvas.Left="120" Canvas.Top="90" Text="✦" FontSize="8" Foreground="#FF69B4" Opacity="0.5">
+                    <TextBlock.RenderTransform><RotateTransform /></TextBlock.RenderTransform>
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever">
+                                    <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" From="90" To="50" Duration="0:0:4.2" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0" To="0.6" Duration="0:0:1" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0.6" To="0" Duration="0:0:1" BeginTime="0:0:3.2" />
+                                    <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" From="0" To="360" Duration="0:0:4.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>
+            </Canvas>
 
             <Grid Grid.Column="0" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
@@ -44,16 +123,16 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="0" Width="64" Height="64" Source="pack://application:,,,/Bloxstrap.ico" RenderOptions.BitmapScalingMode="HighQuality" />
+                    <Image Grid.Column="0" Width="64" Height="64" Source="pack://application:,,,/Resources/PinkUnicorn.png" RenderOptions.BitmapScalingMode="HighQuality" />
                     <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
-                        <TextBlock Text="Bloxstrap" FontSize="24" />
+                        <TextBlock Text="Magical Launcher" FontSize="24" FontWeight="Medium" Foreground="#FF69B4" />
                         <TextBlock Text="{Binding Version, Mode=OneTime}" VerticalAlignment="Bottom" FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
                     </StackPanel>
                 </Grid>
 
                 <StackPanel Grid.Row="1" HorizontalAlignment="Center">
                     <ui:Hyperlink Icon="QuestionCircle48" Content="{x:Static resources:Strings.About_Title}" Command="{Binding LaunchAboutCommand, Mode=OneTime}" HorizontalAlignment="Center" />
-                    <ui:Hyperlink Icon="Book24" Content="{x:Static resources:Strings.LaunchMenu_BloxstrapWiki}" NavigateUri="https://bloxstraplabs.com/wiki/" HorizontalAlignment="Center" />
+                    <ui:Hyperlink Icon="Book24" Content="{x:Static resources:Strings.LaunchMenu_BloxstrapWiki}" NavigateUri="https://github.com/Halo-tuff/Magical-Launcher/wiki" HorizontalAlignment="Center" />
                     <ui:Hyperlink Icon="PeopleCommunity28" Content="{x:Static resources:Strings.LaunchMenu_RobloxCommunity}" NavigateUri="https://www.roblox.com/communities/32380007/Bloxstrap" HorizontalAlignment="Center" />
                 </StackPanel>
             </Grid>

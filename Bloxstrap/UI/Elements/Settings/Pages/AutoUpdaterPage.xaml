@@ -1,0 +1,43 @@
+<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.AutoUpdaterPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d"
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="AutoUpdaterPage"
+      Loaded="Page_Loaded">
+    <StackPanel Margin="0,0,14,14">
+        <TextBlock Text="Auto Updater" FontSize="24" FontWeight="Medium" Margin="0,0,0,4" Foreground="#FF69B4" />
+        <TextBlock Text="Check for and install updates to Magical Launcher automatically." FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,0,0,16" />
+
+        <ui:Card Margin="0,0,0,8">
+            <StackPanel>
+                <TextBlock FontSize="16" FontWeight="Medium" Text="Current Version" />
+                <TextBlock x:Name="CurrentVersion" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,0" />
+            </StackPanel>
+        </ui:Card>
+
+        <ui:Card Margin="0,0,0,8">
+            <StackPanel>
+                <TextBlock FontSize="16" FontWeight="Medium" Text="Latest Version" />
+                <TextBlock x:Name="LatestVersion" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,0" Text="Click Check for Updates" />
+            </StackPanel>
+        </ui:Card>
+
+        <ui:Card Margin="0,0,0,8">
+            <StackPanel>
+                <TextBlock FontSize="16" FontWeight="Medium" Text="Release Notes" />
+                <TextBlock x:Name="ReleaseNotes" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,0" TextWrapping="Wrap" Text="N/A" MaxHeight="200" />
+            </StackPanel>
+        </ui:Card>
+
+        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+            <ui:Button x:Name="CheckUpdateBtn" Content="Check for Updates" Icon="ArrowSync24" Click="CheckUpdate_Click" Margin="0,0,8,0" />
+            <ui:Button x:Name="DownloadUpdateBtn" Content="Download Update" Icon="ArrowDownload24" Click="DownloadUpdate_Click" Visibility="Collapsed" />
+        </StackPanel>
+
+        <TextBlock x:Name="UpdateStatus" Margin="0,12,0,0" FontWeight="SemiBold" Visibility="Collapsed" TextWrapping="Wrap" />
+    </StackPanel>
+</ui:UiPage>

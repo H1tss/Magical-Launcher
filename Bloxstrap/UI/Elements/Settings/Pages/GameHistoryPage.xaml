@@ -1,0 +1,47 @@
+<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.GameHistoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d"
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="GameHistoryPage"
+      Loaded="Page_Loaded">
+    <StackPanel Margin="0,0,14,14">
+        <Grid Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Game History" FontSize="24" FontWeight="Medium" Foreground="#FF69B4" />
+                <TextBlock Text="Track the games and servers you've joined." FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+            <ui:Button Grid.Column="1" Content="Clear All" Icon="Delete28" Appearance="Danger" VerticalAlignment="Center" Click="ClearAll_Click" />
+        </Grid>
+
+        <ListView x:Name="HistoryList" MaxHeight="500">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{Binding GameName}" FontWeight="Medium" />
+                            <TextBlock Text="{Binding Details}" FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding TimeAgo}" FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" HorizontalAlignment="Right" />
+                            <TextBlock Text="{Binding PlaceId}" FontSize="10" Foreground="{DynamicResource TextFillColorTertiaryBrush}" HorizontalAlignment="Right" />
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock x:Name="HistoryStatus" Margin="0,8,0,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+    </StackPanel>
+</ui:UiPage>

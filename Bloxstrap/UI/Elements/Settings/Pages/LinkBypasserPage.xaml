@@ -1,0 +1,50 @@
+<ui:UiPage x:Class="Bloxstrap.UI.Elements.Settings.Pages.LinkBypasserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      Title="LinkBypasserPage">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24">
+        <StackPanel MaxWidth="600" HorizontalAlignment="Left">
+            <TextBlock Text="Link Bypasser" FontSize="24" FontWeight="Medium" Margin="0,0,0,4" Foreground="#FF69B4" />
+            <TextBlock Text="Bypass link shorteners (Linkvertise, Lootlabs, Work.ink, etc.)" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,16" />
+
+            <ui:InfoBar Title="Third-Party Service" Severity="Informational" IsOpen="True" Margin="0,0,0,12">
+                <TextBlock Text="Uses bypass.tools API. You need an API key from bypass.tools" TextWrapping="Wrap" />
+            </ui:InfoBar>
+
+            <ui:Card Margin="0,0,0,12">
+                <StackPanel Margin="12">
+                    <TextBlock Text="Bypass.tools API Key:" Margin="0,0,0,4" />
+                    <StackPanel Orientation="Horizontal">
+                        <ui:TextBox x:Name="ApiKeyInput" Width="350" PlaceholderText="Enter your API key" Margin="0,0,8,0" />
+                        <ui:Button Content="Save" Click="SaveKey_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </ui:Card>
+
+            <ui:Card Margin="0,0,0,12">
+                <StackPanel Margin="12">
+                    <TextBlock Text="Locked Link:" Margin="0,0,0,4" />
+                    <StackPanel Orientation="Horizontal">
+                        <ui:TextBox x:Name="LinkInput" Width="350" PlaceholderText="Paste locked link here" Margin="0,0,8,0" />
+                        <ui:Button Content="Bypass" Appearance="Primary" Click="Bypass_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </ui:Card>
+
+            <ui:Card x:Name="ResultCard" Visibility="Collapsed" Margin="0,0,0,12">
+                <StackPanel Margin="12">
+                    <TextBlock Text="Unlocked URL:" FontWeight="SemiBold" Margin="0,0,0,4" />
+                    <TextBlock x:Name="ResultUrl" Text="" TextWrapping="Wrap" Foreground="#FF69B4" />
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <ui:Button Content="Copy URL" Click="CopyUrl_Click" Margin="0,0,8,0" />
+                        <ui:Button Content="Open URL" Click="OpenUrl_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </ui:Card>
+
+            <TextBlock x:Name="StatusText" Text="" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+        </StackPanel>
+    </ScrollViewer>
+</ui:UiPage>

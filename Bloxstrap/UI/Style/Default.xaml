@@ -6,9 +6,7 @@
 
     <!--  Taken from DefaultUiCardExpanderStyle  -->
     <Style x:Key="NoUserExpansionCardExpanderStyle" TargetType="{x:Type ui:CardExpander}">
-        <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
-        <!--  Universal WPF UI focus  -->
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" Opacity="0.85" />
@@ -42,7 +40,6 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ui:CardExpander}">
-                    <!--  Top level border should not have padding or margin  -->
                     <Border
                         x:Name="ContentBorder"
                         Width="{TemplateBinding Width}"
@@ -61,8 +58,6 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-
-                            <!--  Top level controls always visible  -->
                             <Grid
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="Stretch"
@@ -78,8 +73,6 @@
                                     Content="{TemplateBinding Header}"
                                     TextElement.Foreground="{TemplateBinding Foreground}" />
                             </Grid>
-
-                            <!--  Collapsed content to expand  -->
                             <Border
                                 x:Name="ContentPresenterBorder"
                                 Grid.Row="1"
@@ -107,15 +100,11 @@
                                         <DoubleAnimation
                                             Storyboard.TargetName="ContentPresenterBorder"
                                             Storyboard.TargetProperty="(Border.LayoutTransform).(ScaleTransform.ScaleY)"
-                                            From="0.0"
-                                            To="1.0"
-                                            Duration="00:00:00.167" />
+                                            From="0.0" To="1.0" Duration="00:00:00.167" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ContentPresenterBorder"
                                             Storyboard.TargetProperty="(Border.Opacity)"
-                                            From="0.0"
-                                            To="1.0"
-                                            Duration="00:00:00.167" />
+                                            From="0.0" To="1.0" Duration="00:00:00.167" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -125,21 +114,14 @@
                                         <DoubleAnimation
                                             Storyboard.TargetName="ContentPresenterBorder"
                                             Storyboard.TargetProperty="(Border.LayoutTransform).(ScaleTransform.ScaleY)"
-                                            From="1.0"
-                                            To="0"
-                                            Duration="00:00:00.167" />
+                                            From="1.0" To="0" Duration="00:00:00.167" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ContentPresenterBorder"
                                             Storyboard.TargetProperty="(Border.Opacity)"
-                                            From="1.0"
-                                            To="0.0"
-                                            Duration="00:00:00.167" />
+                                            From="1.0" To="0.0" Duration="00:00:00.167" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <!--<Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />-->
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
@@ -153,7 +135,7 @@
         </Setter>
     </Style>
 
-    <!--  Taken from https://github.com/icsharpcode/AvalonEdit/blob/30cad99ce905412ed5f5e847e3c00e72e69aee77/ICSharpCode.AvalonEdit/TextEditor.xaml  -->
+    <!--  Taken from AvalonEdit  -->
     <Style x:Key="NewTextEditor" TargetType="{x:Type avalonedit:TextEditor}">
         <Setter Property="Foreground" Value="{DynamicResource NewTextEditorForeground}" />
         <Setter Property="Background" Value="{DynamicResource NewTextEditorBackground}" />

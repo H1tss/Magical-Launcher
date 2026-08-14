@@ -24,13 +24,62 @@
 
     <StackPanel Margin="0,0,14,14">
 
+        <!-- Subtle sparkle particles -->
+        <Canvas HorizontalAlignment="Stretch" Height="100" IsHitTestVisible="False" Margin="0,-15,0,0" Opacity="0.5">
+            <Ellipse Canvas.Left="80" Canvas.Top="25" Width="2" Height="2" Fill="#FF69B4">
+                <Ellipse.RenderTransform><RotateTransform /></Ellipse.RenderTransform>
+                <Ellipse.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever">
+                                <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" From="25" To="-5" Duration="0:0:5" />
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0" To="0.8" Duration="0:0:1.5" />
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0.8" To="0" Duration="0:0:1.5" BeginTime="0:0:3.5" />
+                                <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" From="0" To="360" Duration="0:0:5" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Ellipse.Triggers>
+            </Ellipse>
+            <Ellipse Canvas.Left="300" Canvas.Top="40" Width="2" Height="2" Fill="#E6E6FA">
+                <Ellipse.RenderTransform><RotateTransform /></Ellipse.RenderTransform>
+                <Ellipse.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever">
+                                <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" From="40" To="5" Duration="0:0:6" />
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0" To="0.6" Duration="0:0:1.5" />
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0.6" To="0" Duration="0:0:1.5" BeginTime="0:0:4.5" />
+                                <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" From="0" To="-360" Duration="0:0:6" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Ellipse.Triggers>
+            </Ellipse>
+            <Ellipse Canvas.Left="550" Canvas.Top="30" Width="2" Height="2" Fill="#FFB6C1">
+                <Ellipse.RenderTransform><RotateTransform /></Ellipse.RenderTransform>
+                <Ellipse.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever">
+                                <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" From="30" To="0" Duration="0:0:5.5" />
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0" To="0.5" Duration="0:0:1.5" />
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" From="0.5" To="0" Duration="0:0:1.5" BeginTime="0:0:4" />
+                                <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" From="0" To="180" Duration="0:0:5.5" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Ellipse.Triggers>
+            </Ellipse>
+        </Canvas>
+
         <Grid Margin="0,0,0,24" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Image x:Name="Image1" Grid.Column="0" Width="72" Height="72" VerticalAlignment="Center" Source="pack://application:,,,/Bloxstrap.ico" RenderOptions.BitmapScalingMode="HighQuality" />
+            <Image x:Name="Image1" Grid.Column="0" Width="72" Height="72" VerticalAlignment="Center" Source="pack://application:,,,/Resources/PinkUnicorn.png" RenderOptions.BitmapScalingMode="HighQuality" />
             <Image x:Name="Image2" Grid.Column="0" Width="72" Height="72" VerticalAlignment="Center" Source="pack://application:,,,/Resources/BootstrapperStyles/ByfronDialog/Matt.png" RenderOptions.BitmapScalingMode="HighQuality" Opacity="0" />
             
             <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
@@ -39,9 +88,10 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Bloxstrap" Margin="0,0,4,0" FontSize="24" FontWeight="Medium" />
+                    <TextBlock Grid.Column="0" Text="Magical Launcher" Margin="0,0,4,0" FontSize="24" FontWeight="Medium" Foreground="#FF69B4" />
                     <TextBlock Grid.Column="1" Text="{Binding Version, Mode=OneTime}" Margin="4,0,0,2" VerticalAlignment="Bottom" FontSize="16" FontWeight="Medium" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
                 </Grid>
+                <TextBlock Text="by Hit_man &amp; Unicorn Man" Margin="0,2,0,0" FontSize="13" FontStyle="Italic" Foreground="#FF69B4" />
                 <TextBlock Text="{x:Static resources:Strings.Menu_About_Description}" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
             </StackPanel>
         </Grid>
@@ -85,75 +135,5 @@
                 <TextBlock Grid.Row="3" Grid.Column="1" Margin="0,0,0,4" VerticalAlignment="Bottom" Text="{Binding BuildMetadata.CommitRef, Mode=OneTime}" Foreground="{DynamicResource TextFillColorTertiaryBrush}" Visibility="{Binding BuildCommitVisibility, Mode=OneTime}" />
             </Grid>
         </StackPanel>
-
-        <TextBlock Text="{x:Static resources:Strings.Menu_About_Contributors}" FontWeight="Medium" FontSize="20" Margin="0,16,0,0" />
-        <TextBlock Text="{x:Static resources:Strings.Menu_About_Contributors_Description}" TextWrapping="Wrap" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
-        <Grid Margin="0,8,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <controls:Expander Grid.Column="0" Margin="0,0,4,0" HeaderIcon="Code24" HeaderText="{x:Static resources:Strings.Menu_About_Contributors_Code}" IsExpanded="True">
-                <StackPanel>
-                    <controls:MarkdownTextBlock MarkdownText="[pizzaboxer](https://github.com/pizzaboxer)" />
-                    <controls:MarkdownTextBlock MarkdownText="[Matt](https://github.com/bluepilledgreat)" />
-                    <controls:MarkdownTextBlock MarkdownText="[lolmanurfunny](https://github.com/lolmanurfunny)" />
-                    <controls:MarkdownTextBlock MarkdownText="[1011025m](https://github.com/1011025m)" />
-                    <controls:MarkdownTextBlock MarkdownText="[EasternBloxxer](https://github.com/EasternBloxxer)" />
-                    <controls:MarkdownTextBlock MarkdownText="[sitiom](https://github.com/sitiom)" />
-                    <controls:MarkdownTextBlock MarkdownText="[Extravi](https://github.com/Extravi)" />
-                    <controls:MarkdownTextBlock MarkdownText="[EpixScripts](https://github.com/EpixScripts)" />
-                    <controls:MarkdownTextBlock MarkdownText="[swatTurret](https://github.com/swatTurret)" />
-                    <controls:MarkdownTextBlock MarkdownText="[fxeP1](https://github.com/fxeP1)" />
-                    <controls:MarkdownTextBlock MarkdownText="[Redusofficial](https://github.com/Redusofficial)" />
-                    <controls:MarkdownTextBlock MarkdownText="[srthMD](https://github.com/srthMD)" />
-                    <controls:MarkdownTextBlock MarkdownText="[axellse](https://github.com/axellse)" />
-                </StackPanel>
-            </controls:Expander>
-
-            <controls:Expander Grid.Column="1" Margin="4,0,4,0" HeaderIcon="AppsAddIn28" HeaderText="{x:Static resources:Strings.Menu_About_Contributors_FeatureIdeas}" IsExpanded="True">
-                <StackPanel>
-                    <controls:MarkdownTextBlock MarkdownText="[he3als](https://github.com/he3als)" />
-                    <controls:MarkdownTextBlock MarkdownText="[NikSavchenk0](https://github.com/NikSavchenk0)" />
-                    <controls:MarkdownTextBlock MarkdownText="[carter0nline](https://github.com/carter0nline)" />
-                    <controls:MarkdownTextBlock MarkdownText="[lolmanurfunny](https://github.com/lolmanurfunny)" />
-                    <controls:MarkdownTextBlock MarkdownText="[MehKako](https://github.com/MehKako)" />
-                    <controls:MarkdownTextBlock MarkdownText="[EpixScripts](https://github.com/EpixScripts)" />
-                    <controls:MarkdownTextBlock MarkdownText="[knivesofeylis](https://github.com/knivesofeylis)" />
-                    <controls:MarkdownTextBlock MarkdownText="[sha4owz](https://github.com/sha4owz)" />
-                    <controls:MarkdownTextBlock MarkdownText="[DaMlgNoodle](https://github.com/DaMlgNoodle)" />
-                    <controls:MarkdownTextBlock MarkdownText="[nakoyasha](https://github.com/nakoyasha)" />
-                    <controls:MarkdownTextBlock MarkdownText="[exurd](https://github.com/exurd)" />
-                    <controls:MarkdownTextBlock MarkdownText="[0xFE0F](https://github.com/0xFE0F)" />
-                    <controls:MarkdownTextBlock MarkdownText="[Alexa](https://github.com/GoingCrazyDude)" />
-                    <controls:MarkdownTextBlock MarkdownText="[CfwSky](https://www.roblox.com/users/129425241/profile)" />
-                    <controls:MarkdownTextBlock MarkdownText="[ruubloo](https://www.roblox.com/users/158082266/profile)" />
-                    <controls:MarkdownTextBlock MarkdownText="[toyoda165](https://www.roblox.com/users/923416649/profile)" />
-                    <controls:MarkdownTextBlock MarkdownText="[ShadowCodeX](https://github.com/ShadowCodeX-debug)" />
-                    <controls:MarkdownTextBlock MarkdownText="[cub-has-injected](https://github.com/cub-has-injected)" />
-                    <controls:MarkdownTextBlock MarkdownText="[AskaLangly](https://github.com/AskaLangly)" />
-                    <controls:MarkdownTextBlock MarkdownText="[Encythe](https://github.com/Encythe)" />
-                    <controls:MarkdownTextBlock MarkdownText="[hugo9655](https://github.com/hugo9655)" />
-                    <controls:MarkdownTextBlock MarkdownText="[CubesterYT](https://github.com/CubesterYT)" />
-                    <controls:MarkdownTextBlock MarkdownText="[TheRealSpriteMan1337](https://github.com/TheRealSpriteMan1337)" />
-                    <controls:MarkdownTextBlock MarkdownText="[ms-gitblox](https://github.com/ms-gitblox)" />
-                    <controls:MarkdownTextBlock MarkdownText="[Luximoz](https://github.com/Luximoz)" />
-                </StackPanel>
-            </controls:Expander>
-
-            <controls:Expander Grid.Column="2" Margin="4,0,0,0" HeaderIcon="Heart16" HeaderText="{x:Static resources:Strings.Menu_About_Contributors_SpecialThanks}" IsExpanded="True">
-                <StackPanel>
-                    <controls:MarkdownTextBlock MarkdownText="[MaximumADHD](https://github.com/MaximumADHD)" />
-                    <controls:MarkdownTextBlock MarkdownText="[Multako](https://www.roblox.com/users/2485612194/profile)" />
-                    <controls:MarkdownTextBlock MarkdownText="[axstin](https://github.com/axstin)" />
-                    <controls:MarkdownTextBlock MarkdownText="[Mantaraix](https://github.com/Mantaraix)" />
-                    <controls:MarkdownTextBlock MarkdownText="[apprehensions](https://github.com/apprehensions)" />
-                    <controls:MarkdownTextBlock MarkdownText="[axellse](https://github.com/axellse)" />
-                    <controls:MarkdownTextBlock MarkdownText="[BlueOutside](https://github.com/BlueOutside)" />
-                </StackPanel>
-            </controls:Expander>
-        </Grid>
     </StackPanel>
 </ui:UiPage>

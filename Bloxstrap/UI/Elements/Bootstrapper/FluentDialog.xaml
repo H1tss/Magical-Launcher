@@ -27,7 +27,7 @@
     </Window.TaskbarItemInfo>
 
     <!--  Background is for Aero theme only  -->
-    <Grid Background="{Binding Path=BackgroundColourBrush, Mode=OneTime}">
+    <Grid>
         <Grid.Background>
             <StaticResource ResourceKey="UnicornBackgroundBrush" />
         </Grid.Background>
