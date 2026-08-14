@@ -1,32 +1,33 @@
-name: Build Magical Launcher
+name: Build
 
 on:
   push:
-    branches: [ main, master ]
-  workflow_dispatch:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: windows-latest
-    
+
     steps:
     - uses: actions/checkout@v4
       with:
         submodules: recursive
-        
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '6.0.x'
-        
-    - name: Restore dependencies
-      run: dotnet restore Bloxstrap.sln
-      
+        dotnet-version: 6.0.x
+
+    - name: Restore
+      run: dotnet restore
+
     - name: Build
-      run: dotnet publish Bloxstrap.sln -c Release -r win-x64 --self-contained false
-      
-    - name: Upload artifact
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: Magical-Launcher
-        path: Bloxstrap/bin/Release/net6.0-windows/win-x64/publish/
+        name: MagicalLauncher
+        path: Bloxstrap/bin/Release/net6.0-windows/
